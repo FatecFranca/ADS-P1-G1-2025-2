@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Fotos - É o Bicho</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-sans">
+
+    <div class="main-container">
+        
+        <header class="mb-8">
+            <h1 class="text-5xl font-extrabold text-center text-gray-800" style="color: #451a03;">
+                GALERIA DE FOTOS
+            </h1>
+        </header>
+
+        <section class="mb-12">
+            <div class="photo-grid">
+                
+                <!-- Imagem 1 -->
+                <div class="photo-item">
+                    <img src="fotos/20251023_143546.jpg" alt="Foto Clínica 1" onerror="this.onerror=null; this.src='https://placehold.co/400x300/e2e8f0/4a5568?text=Foto+1';">
+                </div>
+                <!-- Imagem 2 -->
+                <div class="photo-item">
+                    <img src="fotos/20251023_143552.jpg" alt="Foto Clínica 2" onerror="this.onerror=null; this.src='https://placehold.co/400x300/e2e8f0/4a5568?text=Foto+2';">
+                </div>
+                <!-- Imagem 3 -->
+                <div class="photo-item">
+                    <img src="fotos/20251023_143554.jpg" alt="Foto Clínica 3" onerror="this.onerror=null; this.src='https://placehold.co/400x300/e2e8f0/4a5568?text=Foto+3';">
+                </div>
+                <!-- Imagem 4 -->
+                <div class="photo-item">
+                    <img src="fotos/MVIMG_20251023_143615.jpg" alt="Recepção" onerror="this.onerror=null; this.src='https://placehold.co/400x300/e2e8f0/4a5568?text=Foto+4';">
+                </div>
+                
+            </div>
+        </section>
+
+        <footer class="text-center mt-12">
+            <a href="clinica.html" class="text-gray-600 hover:text-blue-600 font-semibold text-lg transition-colors">
+                &larr; VOLTAR PARA A CLÍNICA
+            </a>
+        </footer>
+
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox-container">
+        <span id="lightbox-close" class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-img" src="">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+        <a id="lightbox-prev" class="lightbox-prev">&#10094;</a>
+        <a id="lightbox-next" class="lightbox-next">&#10095;</a>
+    </div>
+    
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/SEU_NUMERO" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const galleryItems = document.querySelectorAll('.photo-item img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeBtn = document.getElementById('lightbox-close');
+        const prevBtn = document.getElementById('lightbox-prev');
+        const nextBtn = document.getElementById('lightbox-next');
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            lightboxImg.src = galleryItems[currentIndex].src;
+            lightboxCaption.innerHTML = galleryItems[currentIndex].alt;
+            lightbox.style.display = 'block';
+            updateNavButtons();
+        }
+
+        function closeLightbox() { lightbox.style.display = 'none'; }
+
+        function showPrev() { if (currentIndex > 0) openLightbox(currentIndex - 1); }
+        function showNext() { if (currentIndex < galleryItems.length - 1) openLightbox(currentIndex + 1); }
+
+        function updateNavButtons() {
+            prevBtn.style.display = (currentIndex === 0) ? 'none' : 'block';
+            nextBtn.style.display = (currentIndex === galleryItems.length - 1) ? 'none' : 'block';
+        }
+
+        galleryItems.forEach((img, index) => {
+            img.addEventListener('click', () => openLightbox(index));
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', showPrev);
+        nextBtn.addEventListener('click', showNext);
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'block') {
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

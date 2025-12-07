@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conheça a Clínica - É o Bicho</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-sans">
+
+    <div class="main-container">
+        
+        <header class="mb-8">
+            <h1 class="text-5xl font-extrabold text-center text-gray-800" style="color: #451a03;">
+                CONHEÇA NOSSA CLÍNICA
+            </h1>
+        </header>
+
+        <section class="mb-10">
+            <div class="info-box text-lg">
+                <h2 class="text-2xl font-bold mb-4 text-center">Nossa Estrutura</h2>
+                <p class="mb-3">
+                    Contamos com uma estrutura completa para atender seu pet com todo o carinho e segurança. Nossa clínica possui uma recepção confortável, consultórios equipados, centro cirúrgico moderno e áreas de internação separadas.
+                </p>
+                <p>
+                    Veja abaixo algumas fotos do nosso espaço, pensado para o bem-estar do seu melhor amigo.
+                </p>
+            </div>
+        </section>
+
+        <!-- Carrossel de Fotos -->
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-center mb-6" style="color: #451a03;">Nosso Espaço</h2>
+            
+            <div class="relative w-full max-w-2xl mx-auto overflow-hidden rounded-lg shadow-xl border-4 border-white">
+                <div id="carousel-track" class="carousel-track">
+                    
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide w-full flex-shrink-0">
+                        <img src="fotos/MVIMG_20251023_143615.jpg" alt="Recepção" class="carousel-img" onerror="this.onerror=null; this.src='https://placehold.co/800x500/e2e8f0/4a5568?text=Recepção';">
+                        <div class="p-4 border-t-4 border-yellow-700 bg-white">
+                            <h3 class="font-bold text-xl text-center">RECEPÇÃO</h3>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide w-full flex-shrink-0">
+                        <img src="fotos/20251023_143702.jpg" alt="Consultório" class="carousel-img" onerror="this.onerror=null; this.src='https://placehold.co/800x500/e2e8f0/4a5568?text=Consultório';">
+                        <div class="p-4 border-t-4 border-yellow-700 bg-white">
+                            <h3 class="font-bold text-xl text-center">CONSULTÓRIO</h3>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide w-full flex-shrink-0">
+                        <img src="fotos/20251023_144217.jpg" alt="Centro Cirúrgico" class="carousel-img" onerror="this.onerror=null; this.src='https://placehold.co/800x500/e2e8f0/4a5568?text=Centro+Cirúrgico';">
+                        <div class="p-4 border-t-4 border-yellow-700 bg-white">
+                            <h3 class="font-bold text-xl text-center">CENTRO CIRÚRGICO</h3>
+                        </div>
+                    </div>
+                    
+                     <!-- Slide 4 -->
+                    <div class="carousel-slide w-full flex-shrink-0">
+                        <img src="fotos/20251023_144137.jpg" alt="Internação" class="carousel-img" onerror="this.onerror=null; this.src='https://placehold.co/800x500/e2e8f0/4a5568?text=Internação';">
+                        <div class="p-4 border-t-4 border-yellow-700 bg-white">
+                            <h3 class="font-bold text-xl text-center">INTERNAÇÃO</h3>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button id="prevBtn" class="carousel-btn left-2 disabled:opacity-50" disabled>&#10094;</button>
+                <button id="nextBtn" class="carousel-btn right-2">&#10095;</button>
+            </div>
+        </section>
+
+        <section class="mb-12">
+             <a href="galeria.html" class="btn-custom text-2xl">VER GALERIA DE FOTOS COMPLETA</a>
+        </section>
+
+        <footer class="text-center mt-12">
+            <a href="index.html" class="text-gray-600 hover:text-blue-600 font-semibold text-lg transition-colors">&larr; VOLTAR PARA A PÁGINA INICIAL</a>
+        </footer>
+
+    </div>
+    
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/SEU_NUMERO" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('carousel-track');
+        const slides = Array.from(track.children);
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        const nextButton = document.getElementById('nextBtn');
+        const prevButton = document.getElementById('prevBtn');
+        let currentIndex = 0;
+
+        const moveToSlide = (targetIndex) => {
+            if (targetIndex < 0) targetIndex = 0;
+            if (targetIndex >= slides.length) targetIndex = slides.length - 1;
+            track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+            currentIndex = targetIndex;
+            updateButtons();
+        }
+
+        const updateButtons = () => {
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === slides.length - 1;
+        }
+
+        nextButton.addEventListener('click', () => moveToSlide(currentIndex + 1));
+        prevButton.addEventListener('click', () => moveToSlide(currentIndex - 1));
+
+        window.addEventListener('resize', () => {
+            const newSlideWidth = slides[0].getBoundingClientRect().width;
+            track.style.transform = 'translateX(-' + newSlideWidth * currentIndex + 'px)';
+        });
+        
+        updateButtons();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - É o Bicho</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-sans">
+    <div class="main-container">
+        <header class="mb-8">
+            <h1 class="text-4xl font-extrabold text-center" style="color: #451a03;">FALE CONOSCO</h1>
+        </header>
+
+        <form id="contactForm" class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-md border-2 border-yellow-700 mb-8">
+            <div class="form-group">
+                <label class="form-label">Nome:</label>
+                <input type="text" id="cName" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Assunto:</label>
+                <input type="text" id="cSubject" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Mensagem:</label>
+                <textarea id="cMsg" class="form-textarea" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn-custom text-xl">ENVIAR MENSAGEM</button>
+        </form>
+
+        <div class="text-center space-y-2">
+            <p><i class="fa-solid fa-phone mr-2"></i> (39) 3939-3939</p>
+            <p><i class="fa-solid fa-envelope mr-2"></i> eobicho1@gmail.com</p>
+        </div>
+
+        <footer class="text-center mt-12">
+            <a href="index.html" class="text-gray-600 hover:text-blue-600 font-semibold text-lg">&larr; VOLTAR</a>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('cName').value;
+            const subject = document.getElementById('cSubject').value;
+            const msg = document.getElementById('cMsg').value;
+            const text = `*Contato Site*\nNome: ${name}\nAssunto: ${subject}\nMensagem: ${msg}`;
+            window.open(`https://wa.me/SEU_NUMERO?text=${encodeURIComponent(text)}`, '_blank');
+        });
+    </script>
+</body>
+</html>
